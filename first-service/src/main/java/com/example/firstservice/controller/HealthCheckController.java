@@ -21,4 +21,9 @@ public class HealthCheckController {
         log.info("header={}", header);
         return "First service message";
     }
+
+    @GetMapping("check")
+    public String check(){
+        return "This is a message from first service";
+    }
 }
