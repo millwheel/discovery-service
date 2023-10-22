@@ -58,4 +58,11 @@ public class UserController {
         return responseUsers;
     }
 
+    @GetMapping("/users/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseUser getUser(@PathVariable String userId){
+        UserDto userByUserId = userService.getUserByUserId(userId);
+        return new ModelMapper().map(userByUserId, ResponseUser.class);
+    }
+
 }
