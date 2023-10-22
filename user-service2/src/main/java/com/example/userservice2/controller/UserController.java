@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/user-service")
 public class UserController {
@@ -42,6 +45,17 @@ public class UserController {
         UserDto userDto = mapper.map(user, UserDto.class);
         UserDto createdUserDto = userService.createUser(userDto);
         return mapper.map(createdUserDto, ResponseUser.class);
+    }
+
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ResponseUser> getUsers(){
+        Iterable<UserDto> users = userService.getUserByAll();
+        List<ResponseUser> responseUsers = new ArrayList<>();
+        users.forEach(userDto -> {
+            responseUsers.add(new ModelMapper().map(userDto, ResponseUser.class));
+        });
+        return responseUsers;
     }
 
 }
