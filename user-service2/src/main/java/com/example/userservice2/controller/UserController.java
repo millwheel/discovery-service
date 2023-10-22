@@ -40,8 +40,8 @@ public class UserController {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserDto userDto = mapper.map(user, UserDto.class);
-        userService.createUser(userDto);
-        return mapper.map(userDto, ResponseUser.class);
+        UserDto createdUserDto = userService.createUser(userDto);
+        return mapper.map(createdUserDto, ResponseUser.class);
     }
 
 }
