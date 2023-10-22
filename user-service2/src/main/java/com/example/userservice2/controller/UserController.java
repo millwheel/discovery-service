@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user-service")
 public class UserController {
 
     private final Greeting greeting;
@@ -24,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("health-check")
+    @GetMapping("/health-check")
     public String status(){
         return "The user service is activated successfully.";
     }
