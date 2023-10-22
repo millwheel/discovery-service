@@ -1,10 +1,10 @@
-package com.example.userservice.controller;
+package com.example.userservice2.controller;
 
-import com.example.userservice.dto.UserDto;
-import com.example.userservice.service.UserService;
-import com.example.userservice.vo.Greeting;
-import com.example.userservice.vo.RequestUser;
-import com.example.userservice.vo.ResponseUser;
+import com.example.userservice2.dto.UserDto;
+import com.example.userservice2.service.UserService;
+import com.example.userservice2.vo.Greeting;
+import com.example.userservice2.vo.RequestUser;
+import com.example.userservice2.vo.ResponseUser;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
