@@ -19,9 +19,6 @@ import java.util.List;
 @RequestMapping("/catalog-service")
 public class CatalogController {
 
-
-    @Value("${server.port}")
-    private String serverPort;
     private final CatalogService catalogService;
 
     @Autowired
@@ -31,10 +28,10 @@ public class CatalogController {
 
     @GetMapping("/health-check")
     public String healthCheck(){
-        return "The Catalog service server is activated successfully. Port number is " + serverPort;
+        return "The Catalog service server is activated successfully.";
     }
 
-    @GetMapping("/catalog")
+    @GetMapping("/catalogs")
     @ResponseStatus(HttpStatus.OK)
     public List<ResponseCatalog> getCatalogs(){
         Iterable<CatalogEntity> allCatalogs = catalogService.getAllCatalogs();
