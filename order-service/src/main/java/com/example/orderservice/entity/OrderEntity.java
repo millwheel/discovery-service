@@ -25,8 +25,10 @@ public class OrderEntity implements Serializable {
     private Integer unitPrice;
     @Column(nullable = false)
     private Integer totalPrice;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String userId;
+    @Column(nullable = false, unique = true)
+    private String orderId;
     @Column(nullable = false, insertable = false, updatable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
     private Date createAt;
