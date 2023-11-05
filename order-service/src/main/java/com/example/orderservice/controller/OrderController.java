@@ -24,7 +24,7 @@ public class OrderController {
 
     @GetMapping("/health-check")
     public String healthCheck(){
-        return "The Catalog service server is activated successfully.";
+        return "The Order service server is activated successfully.";
     }
 
     @PostMapping("/{userId}/orders")
