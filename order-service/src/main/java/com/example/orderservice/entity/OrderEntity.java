@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name="order")
+@Table(name="orders")
 public class OrderEntity implements Serializable {
 
     @Id
@@ -20,13 +20,13 @@ public class OrderEntity implements Serializable {
     @Column(nullable = false)
     private Integer qty;
     @Column(nullable = false)
-    private Integer stock;
-    @Column(nullable = false)
     private Integer unitPrice;
     @Column(nullable = false)
     private Integer totalPrice;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String userId;
+    @Column(nullable = false, unique = true)
+    private String orderId;
     @Column(nullable = false, insertable = false, updatable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
     private Date createAt;

@@ -1,6 +1,7 @@
 package com.example.orderservice.controller;
 
 import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.entity.OrderEntity;
 import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.RequestOrder;
 import com.example.orderservice.vo.ResponseOrder;
@@ -8,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/order-service")
@@ -20,7 +24,7 @@ public class OrderController {
 
     @GetMapping("/health-check")
     public String healthCheck(){
-        return "The Catalog service server is activated successfully.";
+        return "The Order service server is activated successfully.";
     }
 
     @PostMapping("/{userId}/orders")
@@ -32,5 +36,16 @@ public class OrderController {
         orderDto.setUserId(userId);
         OrderDto createdOrder = orderService.createOrder(orderDto);
         return mapper.map(createdOrder, ResponseOrder.class);
+    }
+
+    @GetMapping("/{userId}/orders")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ResponseOrder> getOrder(@PathVariable String userId){
+        Iterable<OrderEntity> orders = orderService.getOrdersByUserId(userId);
+        List<ResponseOrder> result = new ArrayList<>();
+        orders.forEach(v -> {
+            result.add(new ModelMapper().map(v, ResponseOrder.class));
+        });
+        return result;
     }
 }
