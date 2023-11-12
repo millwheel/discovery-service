@@ -35,3 +35,7 @@ logging:
   level:
     org.springframework.jdbc.datasource: DEBUG
     org.h2: DEBUG
+
+token:
+  expiration_time: 86400000
+  secret: user_token
