@@ -20,10 +20,12 @@ spring:
             postLogger: true
 
       routes:
+        # Catalog service
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
             - Path=/catalog-service/**
+        # User service
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
@@ -48,29 +50,8 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-
+        # Order service
         - id: order-service
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/order-service/**
-        - id: first-service
-          uri: lb://FIRST-SERVICE
-          predicates:
-            - Path=/first-service/**
-          filters:
-#            - AddRequestHeader=first-request, first-request-header2
-#            - AddResponseHeader=first-response, first-response-header2
-            - CustomFilter
-        - id: second-service
-          uri: lb://SECOND-SERVICE
-          predicates:
-            - Path=/second-service/**
-          filters:
-#            - AddRequestHeader=second-request, second-request-header2
-#            - AddResponseHeader=second-response, second-response-header2
-            - name: CustomFilter
-            - name: LoggingFilter
-              args:
-                baseMessage: Logging filter
-                preLogger: true
-                postLogger: true
