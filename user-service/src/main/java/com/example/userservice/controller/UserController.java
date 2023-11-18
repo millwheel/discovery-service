@@ -47,16 +47,16 @@ public class UserController {
         return mapper.map(createdUserDto, ResponseUser.class);
     }
 
-//    @GetMapping("/users")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<ResponseUser> getUsers(){
-//        Iterable<UserDto> users = userService.getUserByAll();
-//        List<ResponseUser> responseUsers = new ArrayList<>();
-//        users.forEach(userDto -> {
-//            responseUsers.add(new ModelMapper().map(userDto, ResponseUser.class));
-//        });
-//        return responseUsers;
-//    }
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ResponseUser> getUsers(){
+        Iterable<UserDto> users = userService.getUserByAll();
+        List<ResponseUser> responseUsers = new ArrayList<>();
+        users.forEach(userDto -> {
+            responseUsers.add(new ModelMapper().map(userDto, ResponseUser.class));
+        });
+        return responseUsers;
+    }
 
     @GetMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.OK)

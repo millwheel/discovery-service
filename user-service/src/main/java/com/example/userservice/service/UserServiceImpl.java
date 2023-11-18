@@ -55,26 +55,27 @@ public class UserServiceImpl implements UserService{
         return userDto;
     }
 
-//    @Override
-//    public Iterable<UserDto> getUserByAll() {
-//        Iterable<UserEntity> all = userRepository.findAll();
-//
-//        ModelMapper mapper = new ModelMapper();
-//        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//        List<UserDto> userDtos = new ArrayList<>();
-//        for (UserEntity entity : all) {
-//            userDtos.add(mapper.map(entity, UserDto.class));
-//        }
-//        return userDtos;
-//    }
-//
-//    @Override
-//    public UserDto getUserDetailsByEmail(String email) {
-//        UserEntity userEntity = userRepository.findByEmail(username);
-//        if (userEntity == null){
-//            throw new UsernameNotFoundException(username);
-//        }
-//        return new UserDto(userEntity.getEmail(), userEntity.getEncryptedPwd(), true, true, true, true, new ArrayList<>());
-//    }
+    @Override
+    public Iterable<UserDto> getUserByAll() {
+        Iterable<UserEntity> all = userRepository.findAll();
 
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        List<UserDto> userDtos = new ArrayList<>();
+        for (UserEntity entity : all) {
+            userDtos.add(mapper.map(entity, UserDto.class));
+        }
+        return userDtos;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity userEntity = userRepository.findByEmail(username);
+        if (userEntity == null){
+            throw new UsernameNotFoundException(username);
+        }
+        return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(),
+                true, true, true, true,
+                new ArrayList<>());
+    }
 }

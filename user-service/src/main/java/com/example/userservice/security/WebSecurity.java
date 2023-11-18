@@ -30,25 +30,25 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/users/**").permitAll();
-//        http.authorizeRequests().antMatchers("/**")
-//                .hasIpAddress("192.168.0.8")
-//                .and()
-//                .addFilter(getAuthenticationFilter());
+//        http.authorizeRequests().antMatchers("/users/**").permitAll();
+        http.authorizeRequests().antMatchers("/**")
+                .hasIpAddress("192.168.0.8")
+                .and()
+                .addFilter(getAuthenticationFilter());
         http.headers().frameOptions().disable();
     }
 
-//    private AuthenticationFilter getAuthenticationFilter() throws Exception {
-//        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
-//        authenticationFilter.setAuthenticationManager(authenticationManager());
-//
-//        return authenticationFilter;
-//    }
+    private AuthenticationFilter getAuthenticationFilter() throws Exception {
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
+        authenticationFilter.setAuthenticationManager(authenticationManager());
+
+        return authenticationFilter;
+    }
 
     // 인증 관련 작업, 인증이 되어야 권한 부여가 가능함.
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
-//        super.configure(auth);
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+        super.configure(auth);
+    }
 }
