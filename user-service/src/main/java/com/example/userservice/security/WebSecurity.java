@@ -2,6 +2,7 @@ package com.example.userservice.security;
 
 import com.example.userservice.service.UserService;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -37,12 +38,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
-    private AuthenticationFilter getAuthenticationFilter() throws Exception {
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
-        authenticationFilter.setAuthenticationManager(authenticationManager());
-
-        return authenticationFilter;
-    }
+//    private AuthenticationFilter getAuthenticationFilter() throws Exception {
+//        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
+//        authenticationFilter.setAuthenticationManager(authenticationManager());
+//
+//        return authenticationFilter;
+//    }
 
     // 인증 관련 작업, 인증이 되어야 권한 부여가 가능함.
     @Override
