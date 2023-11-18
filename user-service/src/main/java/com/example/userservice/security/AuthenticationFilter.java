@@ -33,28 +33,28 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         this.env = env;
     }
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        try {
-            RequestLogin requestLogin = new ObjectMapper().readValue(request.getInputStream(), RequestLogin.class);
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(requestLogin.getEmail(), requestLogin.getPassword(), new ArrayList<>());
-            return getAuthenticationManager().authenticate(usernamePasswordAuthenticationToken);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        String username = ((User) authResult.getPrincipal()).getUsername();
-        UserDto userDetails = userService.getUserDetailsByEmail(username);
-
-        String token = Jwts.builder()
-                .setSubject(userDetails.getUserId())
-                .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(env.getProperty("token.expiration_time"))))
-                .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
-                .compact();
-        response.addHeader("token", token);
-        response.addHeader("userId", userDetails.getUserId());
-    }
+//    @Override
+//    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+//        try {
+//            RequestLogin requestLogin = new ObjectMapper().readValue(request.getInputStream(), RequestLogin.class);
+//            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(requestLogin.getEmail(), requestLogin.getPassword(), new ArrayList<>());
+//            return getAuthenticationManager().authenticate(usernamePasswordAuthenticationToken);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    @Override
+//    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+//        String username = ((User) authResult.getPrincipal()).getUsername();
+//        UserDto userDetails = userService.getUserDetailsByEmail(username);
+//
+//        String token = Jwts.builder()
+//                .setSubject(userDetails.getUserId())
+//                .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(env.getProperty("token.expiration_time"))))
+//                .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
+//                .compact();
+//        response.addHeader("token", token);
+//        response.addHeader("userId", userDetails.getUserId());
+//    }
 }

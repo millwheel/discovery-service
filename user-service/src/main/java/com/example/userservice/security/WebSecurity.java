@@ -46,9 +46,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //    }
 
     // 인증 관련 작업, 인증이 되어야 권한 부여가 가능함.
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
-        super.configure(auth);
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+//        super.configure(auth);
+//    }
 }
